@@ -8,8 +8,8 @@ $show_confirmation_message = false;
 
 // CSS classes for form feedback messages
 $feedback_css_classes = array(
-  "courses" => 'hidden',
-  "email" => 'hidden'
+  "courses" => "hidden",
+  "email" => "hidden"
 );
 
 // default form values
@@ -33,7 +33,7 @@ if (isset($_POST['request'])) {
   $form_valid = true;
 
   // Get HTTP request user data
-  $form_values["course-vegetarian"] = isset($_POST['japanese-vegetarian']); // untrusted
+  $form_values["course-vegetarian"] = (bool)$_POST['japanese-vegetarian']; // untrusted
   $form_values["course-sauces"] = isset($_POST['sauces-masterclass']); // untrusted
   $form_values["email"] = trim($_POST["email"]); // untrusted
 
@@ -67,8 +67,8 @@ if (isset($_POST['request'])) {
     $show_confirmation_message = true;
   } else {
     // form was not valid, set sticky values
-    $sticky_values["course-vegetarian"] = ($form_values["course-vegetarian"] ? 'checked' : "");
-    $sticky_values["course-sauces"] = ($form_values["course-sauces"] ? 'checked' : "");
+    $sticky_values["course-vegetarian"] = ($form_values["course-vegetarian"] ? "checked" : "");
+    $sticky_values["course-sauces"] = ($form_values["course-sauces"] ? "checked" : "");
     $sticky_values["email"] = $form_values["email"];
   }
 }
@@ -104,7 +104,7 @@ if (isset($_POST['request'])) {
 
       <div class="course-tile">
         <figure>
-          <img src="/images/bok-choi.jpg" alt="Bok Choi" />
+          <img src="/images/bok-choi.jpg" alt="Bok Choi">
           <figcaption>Bok Choi</figcaption>
         </figure>
         <div>
@@ -118,7 +118,7 @@ if (isset($_POST['request'])) {
 
       <div class="course-tile">
         <figure>
-          <img src="/images/teriyaki.jpg" alt="Teriyaki sauce" />
+          <img src="/images/teriyaki.jpg" alt="Teriyaki sauce">
           <figcaption>Teriyaki Sauce</figcaption>
         </figure>
         <div>
@@ -141,11 +141,11 @@ if (isset($_POST['request'])) {
         <div id="feedback-classes" class="feedback <?php echo $feedback_css_classes["courses"]; ?>">Please select one or more classes.</div>
 
         <div class="form-label">
-          <input type="checkbox" name="japanese-vegetarian" id="request-vegetarian" <?php echo $sticky_values["course-vegetarian"]; ?> />
+          <input type="checkbox" name="japanese-vegetarian" id="request-vegetarian" <?php echo $sticky_values["course-vegetarian"]; ?>>
           <label for="request-vegetarian">Japanese Vegetarian</label>
         </div>
         <div class="form-label">
-          <input type="checkbox" name="sauces-masterclass" id="request-sauces" <?php echo $sticky_values["course-sauces"]; ?> />
+          <input type="checkbox" name="sauces-masterclass" id="request-sauces" <?php echo $sticky_values["course-sauces"]; ?>>
           <label for="request-sauces">Sauces Masterclass</label>
         </div>
 
@@ -153,11 +153,13 @@ if (isset($_POST['request'])) {
 
         <div class="form-label">
           <label for="request-email">Email:</label>
-          <input type="email" name="email" id="request-email" value="<?php echo htmlspecialchars($sticky_values["email"]); ?>" />
+          <input type="email" name="email" id="request-email" value="<?php echo htmlspecialchars($sticky_values["email"]); ?>">
         </div>
 
         <div class="align-right">
-          <input id="request-submit" type="submit" name="request" value="Request Information" />
+          <button id="request-submit" type="submit" name="request">
+            Request Information
+          </button>
         </div>
       </form>
     </section>
